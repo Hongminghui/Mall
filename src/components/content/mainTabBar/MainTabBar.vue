@@ -41,7 +41,22 @@
 <style scoped>
 
 img {
-  height: 100%;
-  vertical-align: middle;
+  height: 95%;
+  margin: 0 auto;
+  /*vertical-align: middle;*/
 }
+
+/* 样式很乱，不想再改了 */
+
+@media all and (min-width: 391px){
+  img {
+    width: 27px;
+  }
+}
+
+
+
+
+
+
 </style>

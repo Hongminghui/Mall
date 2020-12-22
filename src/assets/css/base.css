@@ -5,10 +5,14 @@
   --color-high-text: #ff5777;
   --color-tint: #ff8198;
   --color-background: #fff;
-  --font-size: 14px;
+  /* 在iphone5调试窗口320px时，100vw = 320px，使1rem = 100px，
+  窗口变大，1rem的值也等比例放大 */
+  font-size: calc(100vw / 3.2);
   --line-height: 1.5;
 }
-
+* {
+  font-size: 14px;
+}
 *,
 *::before,
 *::after {

@@ -42,9 +42,8 @@ export default {
 
 <style scoped>
 .tab-bar-item {
-  flex-grow: 1;
+  flex: 1 1 auto;
   text-align: center;
-  font-size: 14px;
   position: relative;
   top: 0;
   bottom: 0;
@@ -52,7 +51,20 @@ export default {
 }
 
 .img {
-  height: 22px;
+  height: 0.22rem;
+}
+
+/* 根据底部tabbar等比例放缩的*/
+@media all and (min-width: 391px){
+  .img {
+    width: 27px;
+    height: 27px;
+    margin: 0 auto;
+  }
+  .tab-bar-item {
+    flex: 1;
+    font-size: 14px;
+  }
 }
 
 .active {

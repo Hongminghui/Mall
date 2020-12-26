@@ -28,6 +28,9 @@
     background-size: 30px 30px;
     max-width: 457px;*/
   }
+  #app {
+    max-width: 457px;
+  }
 
 
 </style>

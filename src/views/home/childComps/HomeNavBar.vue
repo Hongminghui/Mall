@@ -25,7 +25,7 @@
     color: white;
   }
   @media all and (min-width: 457px){
-    span {
+    #shop span {
       font-size: 20px;
     }
   }

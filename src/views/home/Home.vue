@@ -1,43 +1,45 @@
 <template>
-  <div class="home">
-    <!--导航栏-->
-    <home-nav-bar ref="nav"></home-nav-bar>
-    <div class="infinite-list-wrapper"
-         @scroll="tabScroll($event)"
-         ref="scrollWrapper"
-         style="overflow:auto">
-      <ul
-        class="list"
-        v-infinite-scroll="load"
-        infinite-scroll-disabled="disabled"
-      >
-        <!--轮播图-->
-        <home-carousel :img-list="banner"></home-carousel>
-        <!--好物特卖-->
-        <home-recommend :img-list="recommend"></home-recommend>
-        <!--分隔条-->
-        <div class="separate"></div>
-        <!--本周流行-->
-        <home-popular></home-popular>
-        <!--控制栏-->
-        <tab-control
-          :text-list="['流行', '新款', '精选']" class="tab-control"
-          @tabItemClick="tabItemClick"
-          :class="{fixed: isFixed}"
-          ref="tabControl"
-          @scroll="tabScroll($event)"
-        ></tab-control>
-        <!--商品列表-->
-        <home-goods-list :goods-list="goodsList[currentType].list"></home-goods-list>
-      </ul>
-      <div class="message">
-        <p v-if="loading">加载中...</p>
-        <p v-if="noMore">没有更多了</p>
+  <div class="homeWrapper">
+    <div class="home">
+      <!--导航栏-->
+      <home-nav-bar ref="nav"></home-nav-bar>
+      <div class="infinite-list-wrapper"
+           @scroll="tabScroll($event)"
+           ref="scrollWrapper"
+           style="overflow:auto">
+        <ul
+          class="list"
+          v-infinite-scroll="load"
+          infinite-scroll-disabled="disabled"
+        >
+          <!--轮播图-->
+          <home-carousel :img-list="banner"></home-carousel>
+          <!--好物特卖-->
+          <home-recommend :img-list="recommend"></home-recommend>
+          <!--分隔条-->
+          <div class="separate"></div>
+          <!--本周流行-->
+          <home-popular></home-popular>
+          <!--控制栏-->
+          <tab-control
+            :text-list="['流行', '新款', '精选']" class="tab-control"
+            @tabItemClick="tabItemClick"
+            :class="{fixed: isFixed}"
+            ref="tabControl"
+            @scroll="tabScroll($event)"
+          ></tab-control>
+          <!--商品列表-->
+          <home-goods-list :goods-list="goodsList[currentType].list"></home-goods-list>
+        </ul>
+        <div class="message">
+          <p v-if="loading">加载中...</p>
+          <p v-if="noMore">没有更多了</p>
+        </div>
       </div>
-    </div>
-    <!--回到顶部-->
-    <el-backtop target=".infinite-list-wrapper" :bottom="100"></el-backtop>
+      <!--回到顶部-->
+      <el-backtop target=".infinite-list-wrapper" :bottom="100"></el-backtop>
 
+    </div>
   </div>
 </template>
 
@@ -107,7 +109,7 @@ export default {
     // 封装请求商品列表的方法，请求相应类型的下一页数据
     requestGoods(type) {
       // console.log(type);
-      console.log(this.goodsRequest);
+      // console.log(this.goodsRequest);
       if (this.goodsList[type].page < 20) {
         this.goodsList[type].page++;
         let requestPage = this.goodsList[type].page;
@@ -145,7 +147,7 @@ export default {
 
     },
     load() {
-      this.debounce(() => console.log('loadMore'))
+      // this.debounce(() => console.log('loadMore'))
       // console.log('loadMore');
       // this.requestGoods(this.currentType)
 
@@ -185,6 +187,11 @@ export default {
 </script>
 
 <style scoped>
+.homeWrapper {
+  width: 100%;
+  /*justify-content: space-evenly;*/
+  position: absolute;
+}
 
 .home {
   position: relative;
@@ -248,7 +255,7 @@ export default {
   position: relative;
 
   height: 10rem;
- /* overflow: scroll;*/
+  /* overflow: scroll;*/
 
 }
 

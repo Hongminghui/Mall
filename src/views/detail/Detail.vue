@@ -1,24 +1,31 @@
 <template>
-  <div class="detail">
-    <!--导航栏-->
-    <detail-nav-bar @itemClick="scrollToBottom"></detail-nav-bar>
-    <div class="scroll" ref="scroll">
-      <div class="content">
-        <!--轮播图-->
-        <div class="block">
-          <span class="demonstration"></span>
-          <el-carousel height="2.0rem">
-            <el-carousel-item v-for="item in images" :key="item">
-              <img :src="item" alt="">
-            </el-carousel-item>
-          </el-carousel>
+  <div class="detailWrapper">
+    <div class="detail">
+      <!--导航栏-->
+      <detail-nav-bar @itemClick="scrollToBottom"></detail-nav-bar>
+      <div class="scroll" ref="scroll">
+        <div class="content">
+          <!--轮播图-->
+          <div class="block">
+            <span class="demonstration"></span>
+            <el-carousel height="2.0rem">
+              <el-carousel-item v-for="item in images" :key="item">
+                <img :src="item" alt="">
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+
+          <!--商品信息-->
+          <detail-goods-info :goods-info="goodsInfo"></detail-goods-info>
+
+          <!--店铺信息，商品详图，厂家信息-->
+          <detail-shop-info :shop-info="shopInfo"></detail-shop-info>
+
+          <!--底部购物车等-->
+          <detail-bottom @cartClick="addToCart">
+
+          </detail-bottom>
         </div>
-
-        <!--商品信息-->
-        <detail-goods-info :goods-info="goodsInfo"></detail-goods-info>
-
-        <!--店铺信息，商品详图，厂家信息-->
-        <detail-shop-info :shop-info="shopInfo"></detail-shop-info>
       </div>
     </div>
   </div>
@@ -29,16 +36,21 @@
 import DetailNavBar from "./childComps/DetailNavBar";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
+import DetailBottom from "./childComps/DetailBottom";
 
 /* 网络方法 */
 import {getDetail} from "../../network/detail";
+
+/* Vuex */
+import {ADD_TO_CART, ADD_COUNTER, COMMIT_GOODS} from "../../store/mutation_type";
 
 export default {
   name: 'Detail',
   components: {
     DetailNavBar,
     DetailGoodsInfo,
-    DetailShopInfo
+    DetailShopInfo,
+    DetailBottom
   },
   data() {
     return {
@@ -57,8 +69,6 @@ export default {
       },
       shopInfo: {
         // 内含icon和name
-
-
       }
 
     }
@@ -66,10 +76,23 @@ export default {
   computed: {},
   methods: {
     getDetail,
-    scrollToBottom() {
-      console.log('click');
+    scrollToBottom(index) {
       // 暂时这样粗略实现
-      window.scrollTo(0, 200000)
+      if (index === 0) {
+        window.scrollTo(0, 0);
+      } else {
+        window.scrollTo(0, 200000);
+      }
+    },
+    addToCart() {
+      // 购物车中展示的商品信息
+      const goodsToShow = {
+        description: this.goodsInfo.description,
+        image: this.images[0],
+        price: this.goodsInfo.price,
+        id: this.$route.params.iid
+      };
+      this.$store.dispatch(ADD_TO_CART, goodsToShow);
     }
   },
   created() {
@@ -79,10 +102,10 @@ export default {
       // console.log(res);
       // 请求返回的数据都保存在这里
       const result = res.data.result;
-      // console.log(result);
+      console.log(result);
       // 轮播图，商品描述，价格，折扣，
       this.images = result.itemInfo.topImages;
-      this.goodsInfo.description = result.detailInfo.desc;
+      this.goodsInfo.description = result.itemInfo.title;
       this.goodsInfo.price = result.itemInfo.highPrice;
       this.goodsInfo.discount = result.itemInfo.discountDesc;
       this.goodsInfo.sellInfo = result.columns;
@@ -109,22 +132,44 @@ export default {
 </script>
 
 <style>
+.detailWrapper {
+  max-width: 457px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-left: 1px solid rgb(240, 240, 240);
+  border-right: 1px solid rgb(240, 240, 240);
+}
 .detail .block {
   max-width: 457px;
   max-height: 300px;
   overflow: hidden;
 }
 
+.scroll {
+  max-width: 457px;
+}
+
 .content {
   position: relative;
   top: 0.35rem;
 }
+/* 保证离顶部的距离存在最大值 */
+@media all and (min-width: 457px){
+  .content {
+    top: 50px;
+  }
 
-.detail img {
+}
+img {
+  width: 100%;
+}
+.detail .block img {
   width: 100%;
   /* 图片太大，而且上面无效背景太多，选择上移图片 */
   position: relative;
-  top: -30%;
+  /*top: -30%;*/
 
 }
 

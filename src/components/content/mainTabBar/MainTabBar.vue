@@ -47,6 +47,12 @@ img {
 }
 
 /* 样式很乱，不想再改了 */
+#main-tab-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 
 @media all and (min-width: 391px){
   img {

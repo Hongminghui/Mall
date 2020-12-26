@@ -58,11 +58,6 @@
       </tbody>
     </table>
 
-
-
-
-
-
   </div>
 
 
@@ -153,10 +148,16 @@ export default {
 
 #score {
   display: inline-block;
-  width: 25px;
+  width: 27px;
 }
 .score > div > span{
   margin: 3px;
+}
+/* 改了一下评分的字体大小 */
+@media all and (min-width: 457px){
+  .score span {
+    font-size: 14px;
+  }
 
 }
 .better {
@@ -192,14 +193,15 @@ export default {
 
 /* 表格 */
 table {
-  border-top: 1px solid black;
+  width: 100%;
+  border-top: 1px solid rgb(240,240,240);
   border-collapse: collapse;
-  margin: 0 5px;
+  padding: 0 5px;
 }
 th, td {
   text-align: center;
   padding: 5px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(240,240,240);
   border-collapse: collapse;
   border-spacing: 0;
 }

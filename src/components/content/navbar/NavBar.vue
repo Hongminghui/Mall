@@ -27,6 +27,8 @@
     right: 0;
     top: 0;
     margin: 0 auto;
+    /* 设置最大宽度 */
+    max-width: 457px;
   }
 
   .nav-bar > span {

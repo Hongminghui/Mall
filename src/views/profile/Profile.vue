@@ -36,7 +36,7 @@
         </div>
         <div>
           <i class="el-icon-bell"></i>
-          <spn>积分商城</spn>
+          <span>积分商城</span>
         </div>
         <div>
           <i class="el-icon-bell"></i>
@@ -52,7 +52,9 @@ import NavBar from "../../components/content/navbar/NavBar";
 
 export default {
   data() {
+    return {
 
+    }
   },
   components: {
     NavBar

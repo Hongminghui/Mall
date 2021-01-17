@@ -10,13 +10,14 @@
       </div>
 
       <div class="cart-item-info">
-        <p class="cart-item-desc">{{item.description}}</p>
+        <p class="cart-item-desc">{{ item.description }}</p>
         <p class="cart-item-price">
-          <span id="price">￥{{item.price}}</span>
-          <span id="count">×{{item.count}}</span>
+          <span id="price">￥{{ item.price }}</span>
+          <span id="count">×{{ item.count }}</span>
         </p>
       </div>
     </div>
+
 
   </div>
 </template>
@@ -43,11 +44,13 @@ export default {
 .cart-list {
   position: relative;
   top: 0.35rem;
+  height: calc(100vh - 0.71rem);
 }
+
 .cart-item {
   display: flex;
   height: 1.1rem;
-  border-top: 1px solid rgb(233,233,233);
+  border-top: 1px solid rgb(233, 233, 233);
 }
 
 
@@ -59,6 +62,7 @@ export default {
   position: relative;
   top: 0.4rem;
 }
+
 .el-checkbox__inner {
   width: 20px;
   height: 20px;
@@ -75,10 +79,11 @@ export default {
 .cart-img-wrapper {
   height: 0.9rem;
   width: 0.75rem;
-  margin: 0.1rem ;
+  margin: 0.1rem;
   border-radius: 0.1rem;
   overflow: hidden;
 }
+
 .cart-img-wrapper > img {
   height: 100%;
   width: 100%;
@@ -115,8 +120,9 @@ export default {
 .cart-item-price #price {
   position: absolute;
   left: 5px;
-  color: rgb(255,163,129);
+  color: rgb(255, 163, 129);
 }
+
 .cart-item-price #count {
   position: absolute;
   right: 45px;
@@ -126,4 +132,5 @@ export default {
 .cart-item-price #count {
   font-size: 24px;
 }
+
 </style>

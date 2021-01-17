@@ -102,7 +102,7 @@ export default {
       // console.log(res);
       // 请求返回的数据都保存在这里
       const result = res.data.result;
-      console.log(result);
+      console.log(res.data)
       // 轮播图，商品描述，价格，折扣，
       this.images = result.itemInfo.topImages;
       this.goodsInfo.description = result.itemInfo.title;

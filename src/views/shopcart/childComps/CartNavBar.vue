@@ -14,8 +14,9 @@ export default {
     NavBar
   },
   data() {
+    const item = localStorage.getItem('cartList')
     return {
-      number: JSON.parse(localStorage.getItem('cartList')).length
+      number: item ? JSON.parse(item).length : 0
     }
   }
 }

@@ -1,24 +1,21 @@
 <template>
   <div class="cart-list">
-    <div class="cart-item" v-for="item in cartList">
-
-      <div class="item-selector">
-        <label for="check">
-          <input type="checkbox" id="check" name="checked">
-        </label>
+    <div v-for="item in cartList" class="cart-item">
+      <div class="cart-checkbox">
+        <el-checkbox v-model="checked"></el-checkbox>
       </div>
 
-      <div class="imageWrapper">
-        <img :src="item.image" alt="商品图片">
+      <div class="cart-img-wrapper">
+        <img :src="item.image" alt="">
       </div>
 
-<!--      <div class="textWrapper">-->
-<!--        <p>{{ item.description }}</p>-->
-<!--        <div>-->
-<!--          <span class="price">￥{{ item.price }}</span>-->
-<!--          <span>×{{ item.count }}</span>-->
-<!--        </div>-->
-<!--      </div>-->
+      <div class="cart-item-info">
+        <p class="cart-item-desc">{{item.description}}</p>
+        <p class="cart-item-price">
+          <span id="price">￥{{item.price}}</span>
+          <span id="count">×{{item.count}}</span>
+        </p>
+      </div>
     </div>
 
   </div>
@@ -29,112 +26,104 @@ export default {
   name: "CartList",
   data() {
     return {
-      cartList: JSON.parse(localStorage.getItem('cartList'))
-      // cartList: this.$store.state.cartList
+      cartList: JSON.parse(localStorage.getItem('cartList')),
+      checked: false
     }
+  },
+  created() {
+    console.log(this.cartList)
   }
+
 
 }
 </script>
 
-<style scoped>
+<style>
 
-/* 距顶部位置 */
 .cart-list {
-  position: absolute;
-  top: 0.35rem;
-  width: 100%;
-
-}
-
-@media all and (min-width: 457px) {
-  .cart-list {
-    top: 50px;
-  }
-}
-
-/* 确定cart-item的框架 */
-.cart-item {
-  height: 110px;
-  width: 100%;
-  border-top: 1px solid rgb(204, 204, 204);
-  padding: 7px;
   position: relative;
+  top: 0.35rem;
 }
-
-/* 水平排列 */
-.cart-item > div {
-  display: inline-block;
-}
-
-
-/* 选择框 */
-.item-selector {
-  width: 27px;
-  height: 95px;
-  position: absolute;
-  top: 7px;
-}
-
-label {
-  height: 100%;
-  width: 100%;
+.cart-item {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding-left: 5px;
+  height: 1.1rem;
+  border-top: 1px solid rgb(233,233,233);
 }
 
-.cart-item input {
-  /* 清除选择框默认样式 */
-  /*-webkit-appearance: none;*/
-  width: 18px;
-  height: 18px;
-  border: 1px solid rgb(208, 209, 212);
+
+/* 复选框的调试 */
+.cart-checkbox {
+  width: 0.3rem;
+  height: 100%;
+  padding: 10px;
+  position: relative;
+  top: 0.4rem;
+}
+.el-checkbox__inner {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
 }
 
-/* 图片样式 */
-.imageWrapper {
-  width: 68px;
-  height: 95px;
-  border-radius: 5px 5px 5px 5px;
+.el-checkbox__inner::after {
+  width: 10px;
+  height: 10px;
+  left: 5px;
+}
+
+/* 图片 */
+.cart-img-wrapper {
+  height: 0.9rem;
+  width: 0.75rem;
+  margin: 0.1rem ;
+  border-radius: 0.1rem;
   overflow: hidden;
+}
+.cart-img-wrapper > img {
+  height: 100%;
+  width: 100%;
+}
+
+.cart-item-info {
+  width: calc(100% - 1.2rem);
+  padding: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cart-item-info p, span {
+  font-size: 18px;
+}
+
+.cart-item-desc {
+  height: 0.3rem;
+  overflow: hidden;
+  line-height: 0.3rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 20px;
+}
+
+.cart-item-price {
   position: absolute;
-  left: 40px;
+  bottom: 15px;
+  height: 20px;
+  width: 100%;
+  margin: 0 10px;
 }
 
-.imageWrapper img {
-  width: 68px;
-  height: 95px;
+.cart-item-price #price {
+  position: absolute;
+  left: 5px;
+  color: rgb(255,163,129);
+}
+.cart-item-price #count {
+  position: absolute;
+  right: 45px;
 }
 
-/*!* 文字部分 *!*/
-/*.textWrapper {*/
-/*  position: absolute;*/
-/*  left: 140px;*/
-/*  margin-right: 20px;*/
-/*  color: black;*/
-/*  overflow: hidden;*/
-/*  width: 300px;*/
-/*}*/
 
-/*.textWrapper > p {*/
-/*  height: 70px;*/
-/*}*/
-
-/*.textWrapper div {*/
-/*  position: absolute;*/
-/*  border: 15px;*/
-/*}*/
-
-/*.textWrapper span {*/
-/*  padding: 10px;*/
-/*  font-size: 18px;*/
-/*}*/
-
-/*.price {*/
-/*  color: red;*/
-/*}*/
-
+.cart-item-price #count {
+  font-size: 24px;
+}
 </style>

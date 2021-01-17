@@ -11,7 +11,8 @@ const mutations = {
     // 给新加入的商品添加一个属性count，来表示商品数量
     payload.count = 1;
     state.cartList.push(payload);
-    console.log('mutations')
+
+
     // 每次更改cartList，都让localStorage来存储
     localStorage.setItem('cartList', JSON.stringify(state.cartList));
   },
@@ -25,7 +26,7 @@ const mutations = {
     let oldGoods = state.cartList.find(goods => goods.id === item.id);
     oldGoods.count++;
     localStorage.setItem('cartList', JSON.stringify(state.cartList));
-    console.log('mutations')
+    console.log(JSON.parse(localStorage.getItem('cartList')))
   },
   /**
    * @Description: 实现提交订单的功能

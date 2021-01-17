@@ -13,7 +13,7 @@ export default {
   name: "ShopCart",
   components: {
     CartNavBar,
-    CartList
+    CartList,
   },
   // mounted() {
   //   console.log(this.$store.state.cartList);
@@ -29,5 +29,6 @@ export default {
   left: 0;
   right: 0;
   margin: 0 auto;
+
 }
 </style>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://152.136.185.210:8000/api/w6";
+const baseUrl = "XXX";
 
 /* 封装axios，避免对第三方框架的过度依赖 */
 export function request(config) {
